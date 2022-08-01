@@ -469,7 +469,7 @@ void ColorSelector::onPaint(ui::PaintEvent& ev)
       SkRuntimeShaderBuilder builder1(m_mainEffect);
       builder1.uniform("iRes") = SkV3{float(rc2.w), float(rc2.h), 0.0f};
       setShaderParams(builder1, true);
-      p.setShader(builder1.makeShader());
+      p.setShader(builder1.makeShader(nullptr, true));
 
       if (isSRGB)
         canvas->translate(rc.x+g->getInternalDeltaX(),
@@ -484,7 +484,7 @@ void ColorSelector::onPaint(ui::PaintEvent& ev)
       SkRuntimeShaderBuilder builder2(m_bottomEffect);
       builder2.uniform("iRes") = SkV3{float(rc2.w), float(rc2.h), 0.0f};
       setShaderParams(builder2, false);
-      p.setShader(builder2.makeShader());
+      p.setShader(builder2.makeShader(nullptr, true));
 
       canvas->drawRect(SkRect::MakeXYWH(0, 0, rc2.w, rc2.h), p);
 
@@ -497,7 +497,7 @@ void ColorSelector::onPaint(ui::PaintEvent& ev)
       builder3.uniform("iColor") = appColor_to_SkV4(m_color);
       builder3.uniform("iBg1") = gfxColor_to_SkV4(grid_color1());
       builder3.uniform("iBg2") = gfxColor_to_SkV4(grid_color2());
-      p.setShader(builder3.makeShader());
+      p.setShader(builder3.makeShader(nullptr, true));
 
       canvas->drawRect(SkRect::MakeXYWH(0, 0, rc2.w, rc2.h), p);
     }
